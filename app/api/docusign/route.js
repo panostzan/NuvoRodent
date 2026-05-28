@@ -83,12 +83,30 @@ export async function POST(request) {
       }
     }
 
-    await envelopesApi.update(
+    const updateResult = await envelopesApi.update(
       process.env.DOCUSIGN_ACCOUNT_ID, envelopeId,
       { envelope: docusign.Envelope.constructFromObject({ status: 'sent' }) }
     )
+    console.log('Envelope update result:', JSON.stringify(updateResult, null, 2))
 
-    return NextResponse.json({ envelopeId })
+    const verifiedEnvelope = await envelopesApi.getEnvelope(
+      process.env.DOCUSIGN_ACCOUNT_ID, envelopeId,
+      { include: 'recipients' }
+    )
+    console.log('Verified envelope status:', verifiedEnvelope.status)
+
+    const recipientsResult = await envelopesApi.listRecipients(
+      process.env.DOCUSIGN_ACCOUNT_ID, envelopeId
+    )
+    const recipientSummary = (recipientsResult.signers ?? []).map(s => ({
+      name: s.name,
+      email: s.email,
+      status: s.status,
+      routingOrder: s.routingOrder,
+    }))
+    console.log('Recipients:', JSON.stringify(recipientSummary, null, 2))
+
+    return NextResponse.json({ envelopeId, status: verifiedEnvelope.status, recipients: recipientSummary })
   } catch (err) {
     const detail = err?.response?.body ?? err?.response?.data ?? err.message
     console.error('DocuSign error:', JSON.stringify(detail, null, 2))

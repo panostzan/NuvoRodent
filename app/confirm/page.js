@@ -37,6 +37,7 @@ export default function ConfirmPage() {
         body: JSON.stringify(data),
       })
       const dsJson = await dsRes.json()
+      console.log('DocuSign response:', dsJson)
       if (!dsRes.ok) {
         const e = dsJson.error
         throw new Error(typeof e === 'object' ? (e.message || 'DocuSign error') : (e || 'Failed to send'))
