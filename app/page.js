@@ -177,6 +177,13 @@ export default function FormPage() {
               </p>
             </div>
           </div>
+          <div className="bg-[#111] rounded-xl border border-[#1e1e1e] px-5 py-3.5 flex items-center justify-between">
+            <div>
+              <p className="text-[11px] text-[#555] mb-0.5">Truck Roll</p>
+              <p className="text-[11px] text-[#444]">+$300 if no local trucks</p>
+            </div>
+            <p className="text-[20px] font-semibold text-[#666]">${(pricing.priceWithGST + 300).toFixed(2)}</p>
+          </div>
         </div>
 
         {/* Client */}
