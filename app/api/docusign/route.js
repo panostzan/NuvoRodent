@@ -21,7 +21,8 @@ export async function POST(request) {
       comments,
     } = body
 
-    console.log('Received body:', JSON.stringify({ clientName, clientEmail, repName, repEmail }))
+    console.log('clientEmail:', clientEmail)
+    console.log('repEmail:', repEmail)
 
     if (!clientEmail?.trim()) throw new Error('clientEmail is empty')
     if (!repEmail?.trim()) throw new Error('repEmail is empty')
