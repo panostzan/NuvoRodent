@@ -21,6 +21,13 @@ export async function POST(request) {
       comments,
     } = body
 
+    console.log('Received body:', JSON.stringify({ clientName, clientEmail, repName, repEmail }))
+
+    if (!clientEmail?.trim()) throw new Error('clientEmail is empty')
+    if (!repEmail?.trim()) throw new Error('repEmail is empty')
+    if (!clientName?.trim()) throw new Error('clientName is empty')
+    if (!repName?.trim()) throw new Error('repName is empty')
+
     const apiClient = await getApiClient()
     const envelopesApi = new docusign.EnvelopesApi(apiClient)
 
