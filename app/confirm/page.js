@@ -45,6 +45,7 @@ export default function ConfirmPage() {
 
       sessionStorage.removeItem('pendingSubmission')
       sessionStorage.setItem('lastEmail', data.clientEmail)
+      sessionStorage.setItem('lastResult', JSON.stringify(dsJson))
       router.push('/success')
     } catch (err) {
       setError(err.message)
