@@ -32,8 +32,8 @@ export async function POST(request) {
     envelopeDefinition.templateId = process.env.DOCUSIGN_TEMPLATE_ID
     envelopeDefinition.status = 'created'
     envelopeDefinition.templateRoles = [
-      docusign.TemplateRole.constructFromObject({ email: clientEmail, name: clientName, roleName: 'customer_role' }),
-      docusign.TemplateRole.constructFromObject({ email: repEmail, name: repName, roleName: 'rep_role' }),
+      docusign.TemplateRole.constructFromObject({ email: clientEmail, name: clientName, roleName: 'customer_role', routingOrder: '1' }),
+      docusign.TemplateRole.constructFromObject({ email: repEmail, name: repName, roleName: 'rep_role', routingOrder: '2' }),
     ]
 
     const draft = await envelopesApi.createEnvelope(
