@@ -7,23 +7,23 @@ import { calculatePrice } from '@/lib/pricing'
 function Counter({ label, value, onChange, min = 0 }) {
   return (
     <div className="flex items-center justify-between py-3.5">
-      <span className="text-[15px] font-extrabold text-[#111]">{label}</span>
+      <span className="text-[15px] font-medium text-[#0f172a]">{label}</span>
       <div className="flex items-center gap-3">
         <button
           type="button"
           onClick={() => onChange(Math.max(min, value - 1))}
           disabled={value <= min}
-          className="w-9 h-9 rounded-lg flex items-center justify-center text-lg font-black transition-opacity disabled:opacity-25 active:opacity-60 text-[#111]"
-          style={{ background: '#d4d4d4' }}
+          className="w-9 h-9 rounded-full flex items-center justify-center text-base font-semibold transition-opacity disabled:opacity-20 active:opacity-50 text-[#475569]"
+          style={{ background: '#e2e8f0' }}
         >
           −
         </button>
-        <span className="text-[16px] font-black w-5 text-center tabular-nums text-[#111]">{value}</span>
+        <span className="text-[16px] font-bold w-6 text-center tabular-nums text-[#0f172a]">{value}</span>
         <button
           type="button"
           onClick={() => onChange(value + 1)}
-          className="w-9 h-9 rounded-lg flex items-center justify-center text-lg font-black active:opacity-70 text-white"
-          style={{ background: '#4c1d95' }}
+          className="w-9 h-9 rounded-full flex items-center justify-center text-base font-semibold active:opacity-70 text-white"
+          style={{ background: '#7c3aed' }}
         >
           +
         </button>
@@ -33,11 +33,11 @@ function Counter({ label, value, onChange, min = 0 }) {
 }
 
 const SectionLabel = ({ children }) => (
-  <p className="text-[11px] font-black tracking-widest uppercase text-[#555] mb-3">{children}</p>
+  <p className="text-[11px] font-semibold tracking-widest uppercase text-[#94a3b8] mb-2.5">{children}</p>
 )
 
 const inputClass =
-  'w-full bg-white border-2 border-[#bbb] rounded-xl px-4 py-3.5 text-[15px] font-bold text-[#111] placeholder-[#999] outline-none focus:border-[#4c1d95] transition-colors'
+  'w-full bg-white border border-[#e2e8f0] rounded-xl px-4 py-3.5 text-[15px] font-medium text-[#0f172a] placeholder-[#cbd5e1] outline-none focus:border-[#7c3aed] focus:ring-2 focus:ring-[#7c3aed]/10 transition-all'
 
 export default function FormPage() {
   const router = useRouter()
@@ -103,10 +103,10 @@ export default function FormPage() {
     <div className="flex flex-col flex-1 pb-10">
 
       {/* Header */}
-      <div className="px-5 pt-6 pb-5 flex items-start justify-between">
+      <div className="px-5 pt-6 pb-4 flex items-center justify-between">
         <div>
-          <p className="text-[11px] font-black tracking-widest uppercase text-[#555] mb-1">Nuvo</p>
-          <h1 className="text-2xl font-black tracking-tight text-[#0a0a0a]">Rodent Guard</h1>
+          <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-[#94a3b8] mb-0.5">Nuvo</p>
+          <h1 className="text-[22px] font-bold tracking-tight text-[#0f172a]">Rodent Guard</h1>
         </div>
         <button
           type="button"
@@ -115,43 +115,33 @@ export default function FormPage() {
             localStorage.removeItem('repEmail')
             router.push('/setup')
           }}
-          className="flex flex-col items-end gap-0.5 active:opacity-60"
+          className="flex flex-col items-end active:opacity-50"
         >
-          <span className="text-[13px] font-extrabold text-[#111] leading-tight">{repName}</span>
-          <span className="text-[11px] font-bold text-[#666]">tap to change</span>
+          <span className="text-[13px] font-semibold text-[#0f172a]">{repName}</span>
+          <span className="text-[11px] text-[#94a3b8]">tap to change</span>
         </button>
       </div>
 
-      <div className="h-[2px] bg-[#ddd] mx-5" />
+      <div className="h-px bg-[#e2e8f0] mx-5 mb-6" />
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-8 px-5 pt-7">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-6 px-5 pb-10">
 
         {/* Property */}
         <div>
           <SectionLabel>Property</SectionLabel>
-          <div className="flex flex-col gap-2.5">
-            <input
-              type="text"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              placeholder="Street address"
-              className={inputClass}
-              required
-            />
-            <input
-              type="text"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              placeholder="City"
-              className={inputClass}
-            />
+          <div className="flex flex-col gap-2">
+            <input type="text" value={address} onChange={(e) => setAddress(e.target.value)}
+              placeholder="Street address" className={inputClass} required />
+            <input type="text" value={city} onChange={(e) => setCity(e.target.value)}
+              placeholder="City" className={inputClass} />
           </div>
         </div>
 
         {/* Configuration */}
         <div>
           <SectionLabel>Configuration</SectionLabel>
-          <div className="bg-white rounded-xl border-2 border-[#bbb] px-4 divide-y-2 divide-[#e0e0e0]">
+          <div className="bg-white rounded-2xl border border-[#e2e8f0] px-4 divide-y divide-[#f1f5f9]"
+            style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
             <Counter label="Short Sides" value={shortSides} onChange={setShortSides} min={0} />
             <Counter label="Long Sides" value={longSides} onChange={setLongSides} min={0} />
             <Counter label="Stories" value={stories} onChange={setStories} min={1} />
@@ -162,72 +152,54 @@ export default function FormPage() {
         {/* Price */}
         <div>
           <SectionLabel>Estimate</SectionLabel>
-          <div className="bg-white rounded-xl border-2 border-[#bbb] px-5 py-4 flex items-center justify-between">
-            <div>
-              <p className="text-[11px] font-black uppercase tracking-wide text-[#555] mb-1">Total with GST</p>
-              <p className="text-[34px] font-black tracking-tight leading-none" style={{ color: '#4c1d95' }}>
-                ${pricing.priceWithGST.toFixed(2)}
-              </p>
+          <div className="rounded-2xl border border-[#e2e8f0] overflow-hidden"
+            style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+            <div className="bg-white px-5 py-4 flex items-center justify-between">
+              <div>
+                <p className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-wide mb-1">With GST</p>
+                <p className="text-[36px] font-bold tracking-tight leading-none" style={{ color: '#7c3aed' }}>
+                  ${pricing.priceWithGST.toFixed(2)}
+                </p>
+              </div>
+              <div className="text-right">
+                <p className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-wide mb-1">Pre-GST</p>
+                <p className="text-[20px] font-bold text-[#334155]">${pricing.preGST.toFixed(2)}</p>
+                <p className="text-[12px] font-medium text-[#94a3b8] mt-0.5">
+                  Commission ${pricing.commission.toFixed(2)}
+                </p>
+              </div>
             </div>
-            <div className="text-right">
-              <p className="text-[11px] font-black uppercase tracking-wide text-[#555] mb-1">Pre-GST</p>
-              <p className="text-[18px] font-extrabold text-[#222]">${pricing.preGST.toFixed(2)}</p>
-              <p className="text-[11px] font-bold text-[#666] mt-1">
-                Commission ${pricing.commission.toFixed(2)}
-              </p>
+            <div className="bg-[#f8fafc] border-t border-[#e2e8f0] px-5 py-3 flex items-center justify-between">
+              <div>
+                <p className="text-[12px] font-semibold text-[#475569]">Truck Roll</p>
+                <p className="text-[11px] text-[#94a3b8]">+$300 if no local trucks</p>
+              </div>
+              <p className="text-[18px] font-bold text-[#475569]">${(pricing.priceWithGST + 300).toFixed(2)}</p>
             </div>
-          </div>
-          <div className="bg-white rounded-xl border-2 border-[#bbb] px-5 py-3.5 flex items-center justify-between mt-2.5">
-            <div>
-              <p className="text-[11px] font-black uppercase tracking-wide text-[#555] mb-0.5">Truck Roll</p>
-              <p className="text-[11px] font-bold text-[#777]">+$300 if no local trucks</p>
-            </div>
-            <p className="text-[20px] font-extrabold text-[#333]">${(pricing.priceWithGST + 300).toFixed(2)}</p>
           </div>
         </div>
 
         {/* Client */}
         <div>
           <SectionLabel>Client</SectionLabel>
-          <div className="flex flex-col gap-2.5">
-            <input
-              type="text"
-              value={clientName}
-              onChange={(e) => setClientName(e.target.value)}
-              placeholder="Full name"
-              className={inputClass}
-              required
-            />
-            <input
-              type="tel"
-              value={clientPhone}
-              onChange={(e) => setClientPhone(e.target.value)}
-              placeholder="Phone (optional)"
-              className={inputClass}
-            />
-            <input
-              type="email"
-              value={clientEmail}
-              onChange={(e) => setClientEmail(e.target.value)}
-              placeholder="Email address"
-              className={inputClass}
-              required
-            />
-            <textarea
-              value={comments}
-              onChange={(e) => setComments(e.target.value)}
-              placeholder="Additional comments (optional)"
-              rows={3}
-              className={`${inputClass} resize-none`}
-            />
+          <div className="flex flex-col gap-2">
+            <input type="text" value={clientName} onChange={(e) => setClientName(e.target.value)}
+              placeholder="Full name" className={inputClass} required />
+            <input type="tel" value={clientPhone} onChange={(e) => setClientPhone(e.target.value)}
+              placeholder="Phone (optional)" className={inputClass} />
+            <input type="email" value={clientEmail} onChange={(e) => setClientEmail(e.target.value)}
+              placeholder="Email address" className={inputClass} required />
+            <textarea value={comments} onChange={(e) => setComments(e.target.value)}
+              placeholder="Additional comments (optional)" rows={3}
+              className={`${inputClass} resize-none`} />
           </div>
         </div>
 
         {/* Submit */}
         <button
           type="submit"
-          className="w-full rounded-xl py-4 text-[17px] font-black text-white active:opacity-80 transition-opacity"
-          style={{ background: '#4c1d95', minHeight: 56 }}
+          className="w-full rounded-2xl py-4 text-[16px] font-semibold text-white active:opacity-80 transition-opacity"
+          style={{ background: 'linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)', minHeight: 56, boxShadow: '0 4px 14px rgba(124,58,237,0.35)' }}
         >
           Review &amp; Send Contract
         </button>
