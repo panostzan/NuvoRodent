@@ -7,23 +7,23 @@ import { calculatePrice } from '@/lib/pricing'
 function Counter({ label, value, onChange, min = 0 }) {
   return (
     <div className="flex items-center justify-between py-3.5">
-      <span className="text-[15px] font-semibold text-[#111]">{label}</span>
+      <span className="text-[15px] font-extrabold text-[#111]">{label}</span>
       <div className="flex items-center gap-3">
         <button
           type="button"
           onClick={() => onChange(Math.max(min, value - 1))}
           disabled={value <= min}
-          className="w-9 h-9 rounded-lg flex items-center justify-center text-lg font-bold transition-opacity disabled:opacity-25 active:opacity-60"
-          style={{ background: '#e0e0e0' }}
+          className="w-9 h-9 rounded-lg flex items-center justify-center text-lg font-black transition-opacity disabled:opacity-25 active:opacity-60 text-[#111]"
+          style={{ background: '#d4d4d4' }}
         >
           −
         </button>
-        <span className="text-[15px] font-bold w-5 text-center tabular-nums text-[#111]">{value}</span>
+        <span className="text-[16px] font-black w-5 text-center tabular-nums text-[#111]">{value}</span>
         <button
           type="button"
           onClick={() => onChange(value + 1)}
-          className="w-9 h-9 rounded-lg flex items-center justify-center text-lg font-bold active:opacity-70 text-white"
-          style={{ background: '#5b21b6' }}
+          className="w-9 h-9 rounded-lg flex items-center justify-center text-lg font-black active:opacity-70 text-white"
+          style={{ background: '#4c1d95' }}
         >
           +
         </button>
@@ -33,11 +33,11 @@ function Counter({ label, value, onChange, min = 0 }) {
 }
 
 const SectionLabel = ({ children }) => (
-  <p className="text-[11px] font-bold tracking-widest uppercase text-[#888] mb-3">{children}</p>
+  <p className="text-[11px] font-black tracking-widest uppercase text-[#555] mb-3">{children}</p>
 )
 
 const inputClass =
-  'w-full bg-white border border-[#c8c8c8] rounded-xl px-4 py-3.5 text-[15px] font-medium text-[#111] placeholder-[#aaa] outline-none focus:border-[#5b21b6] transition-colors'
+  'w-full bg-white border-2 border-[#bbb] rounded-xl px-4 py-3.5 text-[15px] font-bold text-[#111] placeholder-[#999] outline-none focus:border-[#4c1d95] transition-colors'
 
 export default function FormPage() {
   const router = useRouter()
@@ -105,8 +105,8 @@ export default function FormPage() {
       {/* Header */}
       <div className="px-5 pt-6 pb-5 flex items-start justify-between">
         <div>
-          <p className="text-[11px] font-bold tracking-widest uppercase text-[#888] mb-1">Nuvo</p>
-          <h1 className="text-2xl font-bold tracking-tight text-[#0a0a0a]">Rodent Guard</h1>
+          <p className="text-[11px] font-black tracking-widest uppercase text-[#555] mb-1">Nuvo</p>
+          <h1 className="text-2xl font-black tracking-tight text-[#0a0a0a]">Rodent Guard</h1>
         </div>
         <button
           type="button"
@@ -117,12 +117,12 @@ export default function FormPage() {
           }}
           className="flex flex-col items-end gap-0.5 active:opacity-60"
         >
-          <span className="text-[13px] font-bold text-[#111] leading-tight">{repName}</span>
-          <span className="text-[11px] font-medium text-[#888]">tap to change</span>
+          <span className="text-[13px] font-extrabold text-[#111] leading-tight">{repName}</span>
+          <span className="text-[11px] font-bold text-[#666]">tap to change</span>
         </button>
       </div>
 
-      <div className="h-px bg-[#d5d5d5] mx-5" />
+      <div className="h-[2px] bg-[#ddd] mx-5" />
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-8 px-5 pt-7">
 
@@ -151,7 +151,7 @@ export default function FormPage() {
         {/* Configuration */}
         <div>
           <SectionLabel>Configuration</SectionLabel>
-          <div className="bg-white rounded-xl border border-[#c8c8c8] px-4 divide-y divide-[#d5d5d5]">
+          <div className="bg-white rounded-xl border-2 border-[#bbb] px-4 divide-y-2 divide-[#e0e0e0]">
             <Counter label="Short Sides" value={shortSides} onChange={setShortSides} min={0} />
             <Counter label="Long Sides" value={longSides} onChange={setLongSides} min={0} />
             <Counter label="Stories" value={stories} onChange={setStories} min={1} />
@@ -162,27 +162,27 @@ export default function FormPage() {
         {/* Price */}
         <div>
           <SectionLabel>Estimate</SectionLabel>
-          <div className="bg-white rounded-xl border border-[#c8c8c8] px-5 py-4 flex items-center justify-between">
+          <div className="bg-white rounded-xl border-2 border-[#bbb] px-5 py-4 flex items-center justify-between">
             <div>
-              <p className="text-[11px] font-bold text-[#888] mb-1">Total with GST</p>
-              <p className="text-[32px] font-bold tracking-tight leading-none" style={{ color: '#5b21b6' }}>
+              <p className="text-[11px] font-black uppercase tracking-wide text-[#555] mb-1">Total with GST</p>
+              <p className="text-[34px] font-black tracking-tight leading-none" style={{ color: '#4c1d95' }}>
                 ${pricing.priceWithGST.toFixed(2)}
               </p>
             </div>
             <div className="text-right">
-              <p className="text-[11px] font-bold text-[#888] mb-1">Pre-GST</p>
-              <p className="text-[18px] font-bold text-[#444]">${pricing.preGST.toFixed(2)}</p>
-              <p className="text-[11px] font-semibold text-[#888] mt-1">
+              <p className="text-[11px] font-black uppercase tracking-wide text-[#555] mb-1">Pre-GST</p>
+              <p className="text-[18px] font-extrabold text-[#222]">${pricing.preGST.toFixed(2)}</p>
+              <p className="text-[11px] font-bold text-[#666] mt-1">
                 Commission ${pricing.commission.toFixed(2)}
               </p>
             </div>
           </div>
-          <div className="bg-white rounded-xl border border-[#c8c8c8] px-5 py-3.5 flex items-center justify-between mt-2.5">
+          <div className="bg-white rounded-xl border-2 border-[#bbb] px-5 py-3.5 flex items-center justify-between mt-2.5">
             <div>
-              <p className="text-[11px] font-bold text-[#888] mb-0.5">Truck Roll</p>
-              <p className="text-[11px] font-semibold text-[#aaa]">+$300 if no local trucks</p>
+              <p className="text-[11px] font-black uppercase tracking-wide text-[#555] mb-0.5">Truck Roll</p>
+              <p className="text-[11px] font-bold text-[#777]">+$300 if no local trucks</p>
             </div>
-            <p className="text-[20px] font-bold text-[#555]">${(pricing.priceWithGST + 300).toFixed(2)}</p>
+            <p className="text-[20px] font-extrabold text-[#333]">${(pricing.priceWithGST + 300).toFixed(2)}</p>
           </div>
         </div>
 
@@ -226,8 +226,8 @@ export default function FormPage() {
         {/* Submit */}
         <button
           type="submit"
-          className="w-full rounded-xl py-4 text-[16px] font-bold text-white active:opacity-80 transition-opacity"
-          style={{ background: '#5b21b6', minHeight: 56 }}
+          className="w-full rounded-xl py-4 text-[17px] font-black text-white active:opacity-80 transition-opacity"
+          style={{ background: '#4c1d95', minHeight: 56 }}
         >
           Review &amp; Send Contract
         </button>

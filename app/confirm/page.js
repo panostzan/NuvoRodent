@@ -5,9 +5,9 @@ import { useRouter } from 'next/navigation'
 
 function Row({ label, value }) {
   return (
-    <div className="flex justify-between items-start py-3 border-b border-[#d5d5d5]">
-      <span className="text-sm font-semibold text-[#666]">{label}</span>
-      <span className="text-sm font-bold text-right max-w-[60%] text-[#0a0a0a]">{value}</span>
+    <div className="flex justify-between items-start py-3 border-b-2 border-[#e0e0e0]">
+      <span className="text-sm font-extrabold text-[#555]">{label}</span>
+      <span className="text-sm font-black text-right max-w-[60%] text-[#0a0a0a]">{value}</span>
     </div>
   )
 }
@@ -62,25 +62,25 @@ export default function ConfirmPage() {
       <div>
         <button
           onClick={() => router.back()}
-          className="text-sm font-semibold text-[#666] mb-4 flex items-center gap-1"
+          className="text-sm font-extrabold text-[#555] mb-4 flex items-center gap-1"
         >
           ← Back
         </button>
-        <h1 className="text-2xl font-bold text-[#0a0a0a]">Review Contract</h1>
-        <p className="text-sm font-medium text-[#666] mt-1">Confirm details before sending to client.</p>
+        <h1 className="text-2xl font-black text-[#0a0a0a]">Review Contract</h1>
+        <p className="text-sm font-bold text-[#555] mt-1">Confirm details before sending to client.</p>
       </div>
 
       {/* Price callout */}
-      <div className="rounded-2xl p-5 text-center border border-[#c8c8c8] bg-white">
-        <p className="text-sm font-bold text-[#888] mb-1">Total with GST</p>
-        <p className="text-4xl font-bold" style={{ color: '#5b21b6' }}>
+      <div className="rounded-2xl p-5 text-center border-2 border-[#bbb] bg-white">
+        <p className="text-sm font-black uppercase tracking-wide text-[#555] mb-1">Total with GST</p>
+        <p className="text-4xl font-black" style={{ color: '#4c1d95' }}>
           ${Number(data.priceWithGST).toFixed(2)}
         </p>
-        <p className="text-sm font-semibold text-[#888] mt-1">Pre-GST: ${Number(data.preGST).toFixed(2)}</p>
+        <p className="text-sm font-bold text-[#666] mt-1">Pre-GST: ${Number(data.preGST).toFixed(2)}</p>
       </div>
 
       {/* Details */}
-      <div className="rounded-2xl bg-white border border-[#c8c8c8] px-4">
+      <div className="rounded-2xl bg-white border-2 border-[#bbb] px-4">
         <Row label="Client" value={data.clientName} />
         <Row label="Email" value={data.clientEmail} />
         {data.clientPhone && <Row label="Phone" value={data.clientPhone} />}
@@ -91,7 +91,7 @@ export default function ConfirmPage() {
       </div>
 
       {error && (
-        <div className="rounded-xl px-4 py-3 text-sm font-semibold bg-red-50 border border-red-300 text-red-700">
+        <div className="rounded-xl px-4 py-3 text-sm font-bold bg-red-50 border-2 border-red-400 text-red-700">
           {error}
         </div>
       )}
@@ -100,15 +100,15 @@ export default function ConfirmPage() {
         <button
           onClick={handleConfirm}
           disabled={loading}
-          className="w-full rounded-2xl py-5 text-lg font-bold text-white active:opacity-80 disabled:opacity-50"
-          style={{ background: '#5b21b6', minHeight: 64 }}
+          className="w-full rounded-2xl py-5 text-lg font-black text-white active:opacity-80 disabled:opacity-50"
+          style={{ background: '#4c1d95', minHeight: 64 }}
         >
           {loading ? 'Sending…' : 'Confirm & Send DocuSign'}
         </button>
         <button
           onClick={() => router.back()}
           disabled={loading}
-          className="w-full rounded-2xl py-4 text-base font-bold text-[#444] border border-[#c8c8c8] active:opacity-70 bg-white"
+          className="w-full rounded-2xl py-4 text-base font-extrabold text-[#333] border-2 border-[#bbb] active:opacity-70 bg-white"
         >
           Back
         </button>
