@@ -21,35 +21,35 @@ export default function SuccessPage() {
     }
   }, [])
 
-  const statusColor = result?.status === 'sent' ? '#4ade80' : '#f87171'
+  const statusColor = result?.status === 'sent' ? '#16a34a' : '#dc2626'
 
   return (
     <div className="flex flex-col flex-1 px-5 py-8 gap-6">
       <div className="flex flex-col items-center text-center gap-4">
         <div
           className="w-20 h-20 rounded-full flex items-center justify-center"
-          style={{ background: 'rgba(109,40,217,0.15)', border: '1.5px solid #6d28d9' }}
+          style={{ background: 'rgba(109,40,217,0.08)', border: '1.5px solid #6d28d9' }}
         >
           <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-            <path d="M8 18L15 25L28 12" stroke="#a78bfa" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M8 18L15 25L28 12" stroke="#6d28d9" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
 
         <div>
-          <h1 className="text-2xl font-bold tracking-tight mb-2">Contract sent</h1>
+          <h1 className="text-2xl font-bold tracking-tight mb-2 text-[#111]">Contract sent</h1>
           {email ? (
-            <p className="text-[#555] text-[15px]">
-              Sent to <span className="text-white font-medium">{email}</span>
+            <p className="text-[#888] text-[15px]">
+              Sent to <span className="text-[#111] font-medium">{email}</span>
             </p>
           ) : (
-            <p className="text-[#555] text-[15px]">DocuSign delivered successfully.</p>
+            <p className="text-[#888] text-[15px]">DocuSign delivered successfully.</p>
           )}
         </div>
       </div>
 
       {result && (
-        <div className="rounded-xl bg-[#0e0e0e] border border-[#1e1e1e] px-4 py-4 flex flex-col gap-3">
-          <p className="text-[11px] font-semibold tracking-widest uppercase text-[#555]">DocuSign Debug</p>
+        <div className="rounded-xl bg-white border border-[#e0e0e0] px-4 py-4 flex flex-col gap-3">
+          <p className="text-[11px] font-semibold tracking-widest uppercase text-[#aaa]">DocuSign Debug</p>
 
           <div className="flex justify-between items-center">
             <span className="text-[13px] text-[#888]">Envelope status</span>
@@ -60,19 +60,19 @@ export default function SuccessPage() {
 
           <div className="flex flex-col gap-0.5">
             <span className="text-[13px] text-[#888]">Envelope ID</span>
-            <span className="text-[12px] font-mono text-[#555] break-all">{result.envelopeId}</span>
+            <span className="text-[12px] font-mono text-[#bbb] break-all">{result.envelopeId}</span>
           </div>
 
           {result.recipients?.length > 0 && (
-            <div className="flex flex-col gap-2 pt-1 border-t border-[#1e1e1e]">
-              <span className="text-[11px] font-semibold tracking-widest uppercase text-[#555]">Recipients</span>
+            <div className="flex flex-col gap-2 pt-1 border-t border-[#ebebeb]">
+              <span className="text-[11px] font-semibold tracking-widest uppercase text-[#aaa]">Recipients</span>
               {result.recipients.map((r, i) => (
                 <div key={i} className="flex flex-col gap-0.5">
                   <div className="flex justify-between">
-                    <span className="text-[13px] text-[#aaa]">#{r.routingOrder} {r.name}</span>
-                    <span className="text-[12px] text-[#666]">{r.status}</span>
+                    <span className="text-[13px] text-[#555]">#{r.routingOrder} {r.name}</span>
+                    <span className="text-[12px] text-[#888]">{r.status}</span>
                   </div>
-                  <span className="text-[12px] text-[#555]">{r.email}</span>
+                  <span className="text-[12px] text-[#bbb]">{r.email}</span>
                 </div>
               ))}
             </div>

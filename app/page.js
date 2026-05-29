@@ -7,22 +7,22 @@ import { calculatePrice } from '@/lib/pricing'
 function Counter({ label, value, onChange, min = 0 }) {
   return (
     <div className="flex items-center justify-between py-3.5">
-      <span className="text-[15px] text-white">{label}</span>
+      <span className="text-[15px] text-[#111]">{label}</span>
       <div className="flex items-center gap-3">
         <button
           type="button"
           onClick={() => onChange(Math.max(min, value - 1))}
           disabled={value <= min}
           className="w-9 h-9 rounded-lg flex items-center justify-center text-lg font-medium transition-opacity disabled:opacity-25 active:opacity-60"
-          style={{ background: '#1c1c1e' }}
+          style={{ background: '#ebebeb' }}
         >
           −
         </button>
-        <span className="text-[15px] font-semibold w-5 text-center tabular-nums">{value}</span>
+        <span className="text-[15px] font-semibold w-5 text-center tabular-nums text-[#111]">{value}</span>
         <button
           type="button"
           onClick={() => onChange(value + 1)}
-          className="w-9 h-9 rounded-lg flex items-center justify-center text-lg font-medium active:opacity-70"
+          className="w-9 h-9 rounded-lg flex items-center justify-center text-lg font-medium active:opacity-70 text-white"
           style={{ background: '#6d28d9' }}
         >
           +
@@ -33,11 +33,11 @@ function Counter({ label, value, onChange, min = 0 }) {
 }
 
 const SectionLabel = ({ children }) => (
-  <p className="text-[11px] font-semibold tracking-widest uppercase text-[#555] mb-3">{children}</p>
+  <p className="text-[11px] font-semibold tracking-widest uppercase text-[#aaa] mb-3">{children}</p>
 )
 
 const inputClass =
-  'w-full bg-[#111] border border-[#222] rounded-xl px-4 py-3.5 text-[15px] text-white placeholder-[#444] outline-none focus:border-[#6d28d9] transition-colors'
+  'w-full bg-white border border-[#e0e0e0] rounded-xl px-4 py-3.5 text-[15px] text-[#111] placeholder-[#bbb] outline-none focus:border-[#6d28d9] transition-colors'
 
 export default function FormPage() {
   const router = useRouter()
@@ -105,8 +105,8 @@ export default function FormPage() {
       {/* Header */}
       <div className="px-5 pt-6 pb-5 flex items-start justify-between">
         <div>
-          <p className="text-[11px] font-semibold tracking-widest uppercase text-[#555] mb-1">Nuvo</p>
-          <h1 className="text-2xl font-bold tracking-tight">Rodent Guard</h1>
+          <p className="text-[11px] font-semibold tracking-widest uppercase text-[#aaa] mb-1">Nuvo</p>
+          <h1 className="text-2xl font-bold tracking-tight text-[#111]">Rodent Guard</h1>
         </div>
         <button
           type="button"
@@ -117,12 +117,12 @@ export default function FormPage() {
           }}
           className="flex flex-col items-end gap-0.5 active:opacity-60"
         >
-          <span className="text-[13px] font-medium text-white leading-tight">{repName}</span>
-          <span className="text-[11px] text-[#555]">tap to change</span>
+          <span className="text-[13px] font-medium text-[#111] leading-tight">{repName}</span>
+          <span className="text-[11px] text-[#aaa]">tap to change</span>
         </button>
       </div>
 
-      <div className="h-px bg-[#1a1a1a] mx-5" />
+      <div className="h-px bg-[#ebebeb] mx-5" />
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-8 px-5 pt-7">
 
@@ -151,7 +151,7 @@ export default function FormPage() {
         {/* Configuration */}
         <div>
           <SectionLabel>Configuration</SectionLabel>
-          <div className="bg-[#111] rounded-xl border border-[#1e1e1e] px-4 divide-y divide-[#1e1e1e]">
+          <div className="bg-white rounded-xl border border-[#e0e0e0] px-4 divide-y divide-[#ebebeb]">
             <Counter label="Short Sides" value={shortSides} onChange={setShortSides} min={0} />
             <Counter label="Long Sides" value={longSides} onChange={setLongSides} min={0} />
             <Counter label="Stories" value={stories} onChange={setStories} min={1} />
@@ -162,27 +162,27 @@ export default function FormPage() {
         {/* Price */}
         <div>
           <SectionLabel>Estimate</SectionLabel>
-          <div className="bg-[#111] rounded-xl border border-[#1e1e1e] px-5 py-4 flex items-center justify-between">
+          <div className="bg-white rounded-xl border border-[#e0e0e0] px-5 py-4 flex items-center justify-between">
             <div>
-              <p className="text-[11px] text-[#555] mb-1">Total with GST</p>
-              <p className="text-[32px] font-bold tracking-tight leading-none" style={{ color: '#a78bfa' }}>
+              <p className="text-[11px] text-[#aaa] mb-1">Total with GST</p>
+              <p className="text-[32px] font-bold tracking-tight leading-none" style={{ color: '#6d28d9' }}>
                 ${pricing.priceWithGST.toFixed(2)}
               </p>
             </div>
             <div className="text-right">
-              <p className="text-[11px] text-[#555] mb-1">Pre-GST</p>
-              <p className="text-[18px] font-semibold text-[#888]">${pricing.preGST.toFixed(2)}</p>
-              <p className="text-[11px] text-[#444] mt-1">
+              <p className="text-[11px] text-[#aaa] mb-1">Pre-GST</p>
+              <p className="text-[18px] font-semibold text-[#555]">${pricing.preGST.toFixed(2)}</p>
+              <p className="text-[11px] text-[#bbb] mt-1">
                 Commission ${pricing.commission.toFixed(2)}
               </p>
             </div>
           </div>
-          <div className="bg-[#111] rounded-xl border border-[#1e1e1e] px-5 py-3.5 flex items-center justify-between">
+          <div className="bg-white rounded-xl border border-[#e0e0e0] px-5 py-3.5 flex items-center justify-between mt-2.5">
             <div>
-              <p className="text-[11px] text-[#555] mb-0.5">Truck Roll</p>
-              <p className="text-[11px] text-[#444]">+$300 if no local trucks</p>
+              <p className="text-[11px] text-[#aaa] mb-0.5">Truck Roll</p>
+              <p className="text-[11px] text-[#bbb]">+$300 if no local trucks</p>
             </div>
-            <p className="text-[20px] font-semibold text-[#666]">${(pricing.priceWithGST + 300).toFixed(2)}</p>
+            <p className="text-[20px] font-semibold text-[#888]">${(pricing.priceWithGST + 300).toFixed(2)}</p>
           </div>
         </div>
 

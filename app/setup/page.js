@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 const inputClass =
-  'w-full bg-[#111] border border-[#222] rounded-lg px-4 py-3.5 text-[15px] text-white placeholder-[#444] outline-none focus:border-[#6d28d9] transition-colors'
+  'w-full bg-white border border-[#e0e0e0] rounded-lg px-4 py-3.5 text-[15px] text-[#111] placeholder-[#bbb] outline-none focus:border-[#6d28d9] transition-colors'
 
 export default function SetupPage() {
   const router = useRouter()
@@ -25,18 +25,18 @@ export default function SetupPage() {
     <div className="flex flex-col justify-center flex-1 px-6">
 
       <div className="mb-10">
-        <p className="text-[11px] font-semibold tracking-widest uppercase text-[#555] mb-3">Nuvo Rodent Guard</p>
-        <h1 className="text-[28px] font-bold tracking-tight leading-tight mb-3">
+        <p className="text-[11px] font-semibold tracking-widest uppercase text-[#aaa] mb-3">Nuvo Rodent Guard</p>
+        <h1 className="text-[28px] font-bold tracking-tight leading-tight mb-3 text-[#111]">
           Set up your<br />sales profile
         </h1>
-        <p className="text-[#555] text-[15px] leading-relaxed">
+        <p className="text-[#888] text-[15px] leading-relaxed">
           Your name and email are saved to this device. You won't be asked again.
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <div className="flex flex-col gap-1.5">
-          <label className="text-[11px] font-semibold tracking-widest uppercase text-[#555]">Full Name</label>
+          <label className="text-[11px] font-semibold tracking-widest uppercase text-[#aaa]">Full Name</label>
           <input
             type="text"
             value={name}
@@ -48,7 +48,7 @@ export default function SetupPage() {
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-[11px] font-semibold tracking-widest uppercase text-[#555]">Email</label>
+          <label className="text-[11px] font-semibold tracking-widest uppercase text-[#aaa]">Email</label>
           <input
             type="email"
             value={email}
