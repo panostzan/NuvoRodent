@@ -21,7 +21,7 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="min-h-dvh flex flex-col items-center bg-[#f8f8f8] text-[#111]">
+      <body className="min-h-dvh flex flex-col items-center bg-white text-[#0a0a0a]">
         <div className="w-full max-w-[430px] flex-1 flex flex-col">
           {children}
         </div>
