@@ -5,7 +5,7 @@ export const metadata = {
   description: "Sales calculator",
   appleWebApp: {
     capable: true,
-    statusBarStyle: "default",
+    statusBarStyle: "black-translucent",
     title: "Nuvo",
   },
 };
@@ -21,7 +21,7 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="min-h-dvh flex flex-col items-center bg-[#f1f5f9] text-[#0f172a]">
+      <body className="min-h-dvh flex flex-col items-center bg-[#0a0a0a] text-white">
         <div className="w-full max-w-[430px] flex-1 flex flex-col">
           {children}
         </div>
