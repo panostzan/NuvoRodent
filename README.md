@@ -2,7 +2,7 @@
 
 Nuvo Rodent Guard is a mobile-first sales tool for configuring a rodent-guard installation, calculating the estimate, and sending a prefilled DocuSign contract.
 
-It was built for sales reps who need to move from a property assessment to a reviewed contract without carrying a laptop or manually rebuilding the quote.
+It was built as a portfolio project to explore a mobile-first workflow for moving from a property assessment to a reviewed contract without carrying a laptop or manually rebuilding the quote.
 
 ## What it does
 
@@ -15,6 +15,8 @@ It was built for sales reps who need to move from a property assessment to a rev
 ## Stack
 
 Next.js · React · Tailwind CSS · DocuSign eSignature API
+
+> **Public portfolio version:** production pricing rates, DocuSign account identifiers, templates, private keys, and customer-specific configuration are intentionally excluded. The estimator uses illustrative pricing values so the architecture can be reviewed without exposing company data.
 
 ## Architecture
 
