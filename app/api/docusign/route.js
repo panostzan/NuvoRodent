@@ -21,9 +21,6 @@ export async function POST(request) {
       comments,
     } = body
 
-    console.log('clientEmail:', clientEmail)
-    console.log('repEmail:', repEmail)
-
     if (!clientEmail?.trim()) throw new Error('clientEmail is empty')
     if (!repEmail?.trim()) throw new Error('repEmail is empty')
     if (!clientName?.trim()) throw new Error('clientName is empty')
@@ -95,13 +92,11 @@ export async function POST(request) {
       process.env.DOCUSIGN_ACCOUNT_ID, envelopeId,
       { envelope: docusign.Envelope.constructFromObject({ status: 'sent' }) }
     )
-    console.log('Envelope update result:', JSON.stringify(updateResult, null, 2))
 
     const verifiedEnvelope = await envelopesApi.getEnvelope(
       process.env.DOCUSIGN_ACCOUNT_ID, envelopeId,
       { include: 'recipients' }
     )
-    console.log('Verified envelope status:', verifiedEnvelope.status)
 
     const recipientsResult = await envelopesApi.listRecipients(
       process.env.DOCUSIGN_ACCOUNT_ID, envelopeId
@@ -112,12 +107,11 @@ export async function POST(request) {
       status: s.status,
       routingOrder: s.routingOrder,
     }))
-    console.log('Recipients:', JSON.stringify(recipientSummary, null, 2))
 
     return NextResponse.json({ envelopeId, status: verifiedEnvelope.status, recipients: recipientSummary })
   } catch (err) {
     const detail = err?.response?.body ?? err?.response?.data ?? err.message
-    console.error('DocuSign error:', JSON.stringify(detail, null, 2))
+    console.error('DocuSign request failed')
     return NextResponse.json({ error: detail }, { status: 500 })
   }
 }

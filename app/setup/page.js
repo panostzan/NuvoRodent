@@ -30,7 +30,7 @@ export default function SetupPage() {
           Set up your<br />sales profile
         </h1>
         <p className="text-[#555] text-[15px] leading-relaxed">
-          Your name and email are saved to this device. You won't be asked again.
+          Your name and email are saved to this device. You won&apos;t be asked again.
         </p>
       </div>
 

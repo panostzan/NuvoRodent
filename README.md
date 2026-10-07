@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Nuvo Rodent Guard
 
-## Getting Started
+Nuvo Rodent Guard is a small mobile-first sales tool for configuring a rodent-guard installation, calculating the estimate, and sending a prefilled DocuSign contract to the customer and sales representative.
 
-First, run the development server:
+The app is built for a narrow phone layout, but it also works in a desktop browser. It keeps the representative profile on the device, calculates pricing locally, and sends the final contract through a server-side DocuSign route so credentials never reach the browser.
+
+## What it does
+
+- Saves a representative name and email locally on the device.
+- Collects the property, configuration, and customer details.
+- Calculates the pre-GST price, GST-inclusive total, commission, and truck-roll estimate.
+- Shows a review screen before anything is sent.
+- Creates a DocuSign envelope from a template, fills its prefill tabs, sends it, and displays the resulting envelope status.
+
+## Stack
+
+- Next.js App Router
+- React
+- Tailwind CSS
+- DocuSign eSignature API
+- DocuSign JWT authentication
+
+## Run locally
+
+Requirements: Node.js 20 or newer and a DocuSign developer or production account with a template configured for this workflow.
 
 ```bash
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). The first screen asks for the representative profile. The rest of the flow is available after saving it.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Run the checks used before deployment:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+```
 
-## Learn More
+## Environment variables
 
-To learn more about Next.js, take a look at the following resources:
+Copy `.env.example` to `.env.local` and fill in the values for your DocuSign account. The private key is base64 encoded because it is passed to the DocuSign SDK at runtime.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `DOCUSIGN_INTEGRATION_KEY`: DocuSign integration key (client ID)
+- `DOCUSIGN_USER_ID`: API user ID to impersonate
+- `DOCUSIGN_TEMPLATE_ID`: template used for the contract
+- `DOCUSIGN_ACCOUNT_ID`: DocuSign account ID
+- `DOCUSIGN_PRIVATE_KEY`: base64-encoded RSA private key
+- `DOCUSIGN_OAUTH_BASE_PATH`: OAuth base path, such as `account-d.docusign.com`
+- `DOCUSIGN_BASE_PATH`: API base path, such as `https://demo.docusign.net/restapi`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Never commit `.env.local`, private keys, or account credentials. The repository ignores environment files by default.
 
-## Deploy on Vercel
+## Project structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```text
+app/
+  api/docusign/       Server-side DocuSign envelope route
+  confirm/            Review and send screen
+  setup/              Representative setup screen
+  success/            Completion and envelope status screen
+  page.js             Main estimator form
+lib/
+  docusign.js         JWT authentication and API client setup
+  pricing.js          Pure pricing calculation
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## DocuSign template requirements
+
+The configured template needs recipient roles named `customer_role` and `rep_role`. The route fills prefill text tabs when their labels match the fields below:
+
+`effective_date`, `customer_name`, `customer_address`, `addon_details`, `pre_gst_price`, `price_with_gst`, `rep_name`, `rep_date`, `customer_date`, `signed_at`, and `additional_comments`.
+
+For local development, use DocuSign demo credentials and a demo template. Keep production credentials in the deployment provider’s secret manager.
+
+## License
+
+No license has been selected yet. Add one before accepting external contributions or reuse.

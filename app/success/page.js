@@ -12,11 +12,11 @@ export default function SuccessPage() {
     const saved = sessionStorage.getItem('lastEmail')
     const res = sessionStorage.getItem('lastResult')
     if (saved) {
-      setEmail(saved)
+      window.setTimeout(() => setEmail(saved), 0)
       sessionStorage.removeItem('lastEmail')
     }
     if (res) {
-      setResult(JSON.parse(res))
+      window.setTimeout(() => setResult(JSON.parse(res)), 0)
       sessionStorage.removeItem('lastResult')
     }
   }, [])

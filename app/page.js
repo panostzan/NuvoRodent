@@ -63,8 +63,11 @@ export default function FormPage() {
     if (!savedName || !savedEmail) {
       router.replace('/setup')
     } else {
-      setRepName(savedName)
-      setRepEmail(savedEmail)
+      const id = window.setTimeout(() => {
+        setRepName(savedName)
+        setRepEmail(savedEmail)
+      }, 0)
+      return () => window.clearTimeout(id)
     }
   }, [router])
 
@@ -94,7 +97,7 @@ export default function FormPage() {
       sessionStorage.setItem('pendingSubmission', JSON.stringify(data))
       router.push('/confirm')
     },
-    [address, city, shortSides, longSides, stories, roofPitch, clientName, clientPhone, clientEmail, comments, pricing, repName, router]
+    [address, city, shortSides, longSides, stories, roofPitch, clientName, clientPhone, clientEmail, comments, pricing, repName, repEmail, router]
   )
 
   if (repName === null) return null
